@@ -22,3 +22,17 @@ void Configure_RCC_Clock(void){
 	SystemCoreClockUpdate();	// Met � jour SystemCoreClock avec la config du RCC
     SysTick_Config(SystemCoreClock/MillisecondsIT);	// Configure le SysTick � 1 ms
 }
+
+//	RCC->CR (Registre de contrôle de l’horloge ): Ce registre va contrôler l’activation des possibles sources d’horloge afin de générer les bonnes
+//	fréquences. Quand une source se fait activer, il faut attendre qu’elle soit prête avant de pouvoir
+//	l’utiliser. Pour cela, les drapeaux des sources sont aussi présents dans ce registre pour permettre au
+//	programme d’attendre l’initialisation des sources avant de continuer. Pour activer une source, il faut
+//	préalablement la configurer à l’aide des autres registres.
+//
+//	RCC->CFGR (Registre de configuration de l’horloge): Ce registre à deux utilités; déterminer le chemin de l’horloge et configurer les multiplicateurs et
+//	diviseurs. Si la source d’horloge n’est pas prête quand elle est sélectionnée, système va continuer de
+//	fonctionner sur l’ancien chemin et va transférer de source quand elle sera prêt. 
+//
+//	Registre d’activation des modules AHB : RCC->AHBENR:
+//	Ce registre sert à activer l’horloge des périphériques systèmes du microcontrôleur. Il s’utilise de la
+//	même manière. Dans le cadre de ce laboratoire, uniquement les GPIO sont utilisés.
